@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VESTIBULINHO ONLINE 2024</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        #timer {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        iframe {
+            width: 100%;
+            max-width: 100%;
+            height: 80vh;
+            border: none;
+        }
+        @media (max-width: 768px) {
+            #timer {
+                font-size: 36px;
+            }
+        }
+        @media (max-width: 480px) {
+            #timer {
+                font-size: 28px;
+            }
+        }
+    </style>
+    <script>
+        function startTimer(duration, display) {
+            var timer = duration, minutes, seconds;
+            var interval = setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = minutes + ":" + seconds;
+
+                if (--timer < 0) {
+                    clearInterval(interval);
+                    alert("Tempo esgotado! Enviando o formulário automaticamente.");
+                    document.getElementById("googleForm").submit();
+                }
+            }, 1000);
+        }
+
+        window.onload = function () {
+            var fiveMinutes = 60 * 5,
+                display = document.querySelector('#timer');
+            startTimer(fiveMinutes, display);
+        };
+    </script>
+</head>
+<body>
+    <div id="timer">05:00</div>
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe_MrOphokNNIvcFbN4wNnyhmGM2ca68jRelRVrZWNc-Suvrg/viewform" id="googleForm">Carregando…</iframe>
+</body>
+</html>
